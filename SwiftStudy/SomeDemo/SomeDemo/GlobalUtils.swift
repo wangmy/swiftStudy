@@ -25,3 +25,16 @@ extension UIColor {
         }
     }
 }
+
+extension CAKeyframeAnimation {
+    static func pathAnimation(startPoint: CGPoint, endPoint: CGPoint) -> CAKeyframeAnimation {
+        let animation = CAKeyframeAnimation(keyPath: "position")
+        let path = UIBezierPath()
+        path.move(to: startPoint)
+        path.addQuadCurve(to: endPoint, controlPoint: CGPoint(x: startPoint.x, y: endPoint.y))
+        animation.path = path.cgPath
+        animation.fillMode = .forwards
+        animation.isRemovedOnCompletion = false
+        return animation
+    }
+}
